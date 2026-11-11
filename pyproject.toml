@@ -1,0 +1,38 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "enterprise-llama-rag"
+version = "0.1.0"
+requires-python = ">=3.12"
+description = "Document question-answering RAG pipeline using LlamaIndex, Qdrant, and LlamaParse"
+dependencies = [
+    "llama-index-core>=0.12.0",
+    "llama-index-readers-file>=0.4.0",
+    "llama-index-vector-stores-qdrant>=0.4.0",
+    "llama-index-postprocessor-cohere-rerank>=0.3.0",
+    "llama-index-llms-groq>=0.3.0",
+    "llama-index-embeddings-huggingface>=0.4.0",
+    "llama-cloud>=2.8.0",
+    "torch>=2.15.0",
+    "qdrant-client>=1.12.0",
+    "pydantic-settings>=2.4.0",
+    "python-dotenv>=1.0.1"
+]
+
+[project.optional-dependencies]
+test = ["pytest>=8"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[[tool.uv.index]]
+name = "pytorch-cpu"
+url = "https://download.pytorch.org/whl/cpu"
+explicit = true
+
+[tool.uv.sources]
+torch = [
+    { index = "pytorch-cpu", marker = "sys_platform == 'linux'" },
+]
